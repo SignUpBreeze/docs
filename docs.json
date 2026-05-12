@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
-  "name": "SignUpBreeze Docs",
+  "name": "SignUpBreeze Documentation",
   "description": "Learn how to create events, manage volunteer signups, and get the most out of SignUpBreeze.",
   "colors": {
     "primary": "#166E3F",
@@ -93,7 +93,7 @@
     "primary": {
       "type": "button",
       "label": "Get Started",
-      "href": "https://signupbreeze.com"
+      "href": "https://signupbreeze.com?ref=docs"
     }
   },
   "footer": {
