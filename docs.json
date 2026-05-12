@@ -86,7 +86,7 @@
   },
   "logo": {
     "light": "/logo/signupbreeze-logo-light.png",
-    "dark": "/logo/dark.svg"
+    "dark": "/logo/signupbreeze-logo-dark"
   },
   "navbar": {
     "links": [],
