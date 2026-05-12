@@ -1,8 +1,8 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
-  "name": "Product Guide",
-  "description": "Step-by-step guides for every product—platform setup, analytics, and integrations in one place.",
+  "name": "SignUpBreeze Docs",
+  "description": "Learn how to create events, manage volunteer signups, and get the most out of SignUpBreeze.",
   "colors": {
     "primary": "#166E3F",
     "light": "#26BD6C",
@@ -15,9 +15,6 @@
   "styling": {
     "eyebrows": "breadcrumbs"
   },
-  "contextual": {
-    "options": ["copy", "view", "assistant", "mcp", "add-mcp"]
-  },
   "navigation": {
     "global": {
       "anchors": [
@@ -29,49 +26,60 @@
         {
           "anchor": "Changelog",
           "icon": "scroll-text",
-          "href": "https://www.mintlify.com/docs/changelog"
+          "href": "/changelog"
         },
         {
-          "anchor": "Help",
-          "icon": "life-buoy",
-          "href": "https://www.mintlify.com/docs/contact-support"
+          "anchor": "SignUpBreeze.com",
+          "icon": "external-link",
+          "href": "https://signupbreeze.com"
         }
       ]
     },
-    "directory": "card",
     "groups": [
       {
-        "group": "Platform",
-        "icon": "layers",
-        "expanded": true,
+        "group": "Getting Started",
+        "icon": "rocket",
         "pages": [
-          "platform/quickstart",
-          "platform/key-concepts",
-          "platform/configuration/settings",
-          "platform/configuration/user-management",
-          "platform/administration/roles-permissions"
+          "getting-started/introduction",
+          "getting-started/key-concepts",
+          "getting-started/quickstart"
         ]
       },
       {
-        "group": "Analytics",
-        "icon": "chart-bar",
-        "expanded": true,
+        "group": "Organizer Guide",
+        "icon": "clipboard-list",
         "pages": [
-          "analytics/quickstart",
-          "analytics/connect-data",
-          "analytics/dashboards/create-dashboard",
-          "analytics/reports/scheduled-reports"
+          "organizers/creating-events",
+          "organizers/managing-shifts",
+          "organizers/managing-signups",
+          "organizers/sharing-events",
+          "organizers/teams"
         ]
       },
       {
-        "group": "Integrations",
-        "icon": "plug",
-        "expanded": true,
+        "group": "Volunteer Guide",
+        "icon": "hand-helping",
         "pages": [
-          "integrations/quickstart",
-          "integrations/authentication",
-          "integrations/connectors/crm",
-          "integrations/webhooks/configure"
+          "volunteers/signing-up",
+          "volunteers/magic-links",
+          "volunteers/managing-registrations"
+        ]
+      },
+      {
+        "group": "Account & Settings",
+        "icon": "settings",
+        "pages": [
+          "account/profile",
+          "account/security",
+          "account/appearance",
+          "account/notifications"
+        ]
+      },
+      {
+        "group": "Changelog",
+        "icon": "scroll-text",
+        "pages": [
+          "changelog"
         ]
       }
     ]
@@ -84,14 +92,15 @@
     "links": [],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "label": "Get Started",
+      "href": "https://signupbreeze.com"
     }
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/yourcompany",
-      "linkedin": "https://linkedin.com/company/yourcompany"
+      "x": "https://x.com/SignUpBreeze",
+      "linkedin": "https://www.linkedin.com/company/signupbreeze",
+      "instagram": "https://www.instagram.com/signupbreeze/"
     }
   }
 }
