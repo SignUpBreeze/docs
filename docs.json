@@ -69,7 +69,7 @@
         "icon": "settings",
         "pages": [
           "account/profile",
-          "account/security",
+          "account/organizations",
           "account/appearance",
           "account/notifications"
         ]
