@@ -1,36 +1,55 @@
 ---
 title: Creating Events
-description: How to create and configure events in SignUpBreeze.
+description: How to create and configure events in SignUpBreeze using templates or from scratch.
 ---
 
-Events are the core of SignUpBreeze. Each event represents something you need volunteers for.
+Events are the core of SignUpBreeze. Each event represents something you need volunteers for — a bake sale, park cleanup, watch party, fundraiser, or anything else.
 
-## Creating a new event
+## Starting a new event
 
-1. Navigate to your dashboard and click **Create Event**.
-2. Fill in the event details:
-   - **Title** — a clear, descriptive name
-   - **Description** — what volunteers need to know (what to bring, what to expect, parking info, etc.)
-   - **Location** — physical address or virtual meeting link
-   - **Date range** — when the event takes place
-3. Save the event.
+From your dashboard or the Events page, click the **+ Create Event** button. You'll see the template picker.
 
-## Editing an event
+<Frame caption="Choose from dozens of templates or start from scratch">
+  <img src="/images/choose-template.webp" alt="Template picker showing event templates organized by category" />
+</Frame>
 
-From your event list, click on any event to open its overview. From there, navigate to the event details page to update the title, description, location, or dates.
+### Using a template
 
-Changes are saved immediately and reflected on the public event page.
+SignUpBreeze comes with a library of predefined templates organized by category:
 
-## Event overview
+- **School & Education** — field day, classroom volunteer, book fair
+- **Sports & Recreation** — tournament, practice schedule, team events
+- **Community & Church** — food drive, worship service, community cleanup
+- **Family & Social** — watch party, engagement party, baby shower
+- **Workplace & Business** — team building, office events
+- **Events & Celebrations** — fundraiser gala, holiday party, graduation
 
-The event overview page is your command center. It shows you the event details, shift schedule, and current signup numbers at a glance. This is where you'll spend most of your time managing an active event.
+Each template includes a cover image, description, pre-configured shifts, and an event badge. Click any template to create an event based on it — the title, description, shifts, cover image, and appearance settings are all pre-filled for you.
 
-## Event slug and public URL
+### Starting from scratch
 
-Every event gets a URL-friendly slug based on its title (e.g., `spring-bake-sale`). This becomes part of the public URL that volunteers use to sign up:
+Click the **Start from scratch** button in the top right to create a blank event. You'll fill in everything yourself.
 
-```
-https://signupbreeze.com/e/spring-bake-sale
-```
+## Event details
 
-You can share this link anywhere — email, text, social media, printed flyers.
+Whether you chose a template or started from scratch, you can edit all event details from the **Details** tab:
+
+<Frame caption="The Details tab lets you edit all event information">
+  <img src="/images/event-details.webp" alt="Event Details form showing title, description, location, dates, timezone, and publish toggle" />
+</Frame>
+
+- **Title** (required) — the name of your event
+- **Description** — what volunteers need to know (what to bring, expectations, parking, etc.)
+- **Location** — a physical address or meeting URL (placeholder hint: "e.g. Centennial Park Main Fields or meeting URL")
+- **Start Date** (required) — when the event begins
+- **End Date** — when it ends (can be the same day for single-day events)
+- **Timezone** — defaults to your local timezone, can be changed via dropdown
+- **Published** — toggle to make the event visible on its public page
+
+Click **Save** to apply your changes.
+
+## Publishing your event
+
+Events are unpublished by default. When you're ready to share your event with volunteers, go to the **Details** tab and turn on the **Published** toggle, then click **Save**.
+
+Once published, a green "Published" badge appears on the event overview, and the public event page becomes accessible to anyone with the link.
