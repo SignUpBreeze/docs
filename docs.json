@@ -52,7 +52,11 @@
           "organizers/creating-events",
           "organizers/managing-shifts",
           "organizers/managing-signups",
-          "organizers/sharing-events"
+          "organizers/custom-questions",
+          "organizers/reminders",
+          "organizers/managing-waitlists",
+          "organizers/sharing-events",
+          "organizers/team-calendars"
         ]
       },
       {
@@ -61,7 +65,8 @@
         "pages": [
           "volunteers/signing-up",
           "volunteers/magic-links",
-          "volunteers/managing-registrations"
+          "volunteers/managing-registrations",
+          "volunteers/waitlists"
         ]
       },
       {
@@ -69,7 +74,9 @@
         "icon": "settings",
         "pages": [
           "account/profile",
+          "account/security",
           "account/organizations",
+          "account/billing",
           "account/appearance",
           "account/notifications"
         ]
