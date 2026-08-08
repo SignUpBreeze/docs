@@ -78,7 +78,8 @@
           "account/organizations",
           "account/billing",
           "account/appearance",
-          "account/notifications"
+          "account/notifications",
+          "account/support"
         ]
       },
       {
