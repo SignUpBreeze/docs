@@ -1,0 +1,42 @@
+---
+title: Idempotency
+description: Send an Idempotency-Key so a retried write happens once, not twice.
+---
+
+Retries happen. A request times out, a connection drops, or an agent decides it never got an answer — and the same call goes out again. Without protection, "create the snack signup for Saturday" run twice creates two events.
+
+Send an `Idempotency-Key` header on every write and that stops being possible.
+
+```bash
+curl --request POST https://api.signupbreeze.com/v1/events \
+  --header "Authorization: Bearer YOUR_API_TOKEN" \
+  --header "Idempotency-Key: a7f3c1e0-2b44-4f6e-9c1d-8e5b0a2d7f31" \
+  --header "Content-Type: application/json" \
+  --data '{"title": "Fall Festival", "start_date": "2026-09-12", "timezone": "America/Los_Angeles"}'
+```
+
+## How it works
+
+The first request with a given key runs normally. If it succeeds, its response is stored for 24 hours.
+
+Any later request with the same key gets that stored response replayed — the same status code, the same body — and nothing happens on the server. Replayed responses carry an `Idempotent-Replay: true` header, so you can tell the two apart if you care.
+
+After 24 hours the key is forgotten and the same key would run for real again. That is far longer than any sensible retry window.
+
+## Choosing keys
+
+Use a UUID, one per logical operation. Generate it before the first attempt and reuse the same value for every retry of that same operation.
+
+Do not reuse a key across different operations. Keys are matched together with the method and path, so `POST /v1/events` and `POST /v1/events/{id}/duplicate` with the same key do not collide — but two different events created with one key will, and the second will silently return the first one's response.
+
+Keys are scoped to your token. Another organization using the same key never sees your response.
+
+## Only successful writes are replayed
+
+If a write fails — bad input, a missing scope, a plan limit — nothing is stored. Fix the problem and retry with the same key, and the request runs for real.
+
+<Note>Reads ignore the header entirely. `GET` requests change nothing, so there is nothing to protect against.</Note>
+
+## Should you always send one?
+
+Yes, on writes. It costs a header, and it is the difference between a network blip being invisible and a duplicate event that someone has to find and delete. This matters most when the caller is an AI agent, which retries far more readily than a person clicking a button.

@@ -1,0 +1,68 @@
+---
+title: Errors
+description: What each status code means and what to do about it.
+---
+
+Errors are JSON, and always carry a `message`:
+
+```json
+{
+  "message": "Not found."
+}
+```
+
+## Status codes
+
+| Code | Meaning | What to do |
+| --- | --- | --- |
+| `401` | The token is missing, revoked, or expired. | Get a new token. Retrying will not help. |
+| `403` | The token is valid but lacks the required scope, or the organization's plan does not include API access. | Create a token with the right [scopes](/api-reference/scopes), or upgrade the plan. |
+| `404` | No such record — or it belongs to another organization. | See below. |
+| `422` | The request was understood but rejected. | Read `errors` for the specific fields, and fix the request. |
+| `429` | You have exceeded 120 requests per minute. | Wait the number of seconds in `Retry-After`, then retry. |
+
+## A 404 may mean "not yours"
+
+Everything a token can reach belongs to its organization. Asking for a record that belongs to a different organization returns `404`, not `403`.
+
+This is deliberate. A `403` would confirm the record exists, which would let anyone with a token check whether a given ID is real. So treat `404` as "this ID is not available to this token" rather than "this ID does not exist anywhere".
+
+In practice, a `404` on an ID you are sure about usually means the token belongs to a different organization than you thought.
+
+## Validation errors
+
+A `422` lists the problem per field:
+
+```json
+{
+  "message": "The start date field is required.",
+  "errors": {
+    "start_date": ["The start date field is required."]
+  }
+}
+```
+
+Fix the request before retrying. Retrying an unchanged `422` gives the same `422`, and — unlike a successful write — a failed request is never [replayed from an idempotency key](/api-reference/idempotency), so the retry runs for real once the input is right.
+
+## Plan limits
+
+Hitting a plan limit is an answer, not a fault. It comes back as `422` with an `error` field you can match on:
+
+```json
+{
+  "message": "You have reached the maximum number of active events for your plan.",
+  "error": "plan_limit_reached",
+  "limit": {
+    "feature": "max_active_events",
+    "limit": 10
+  }
+}
+```
+
+The distinction matters for anything acting on its own: `plan_limit_reached` means "the request was fine, the plan is the obstacle" and calls for upgrading or archiving an old event — not for rewriting the request and trying again.
+
+## Retrying safely
+
+`429` and `5xx` are worth retrying with backoff. `4xx` other than `429` will return the same answer until you change something.
+
+Whenever you retry a write, send the same [`Idempotency-Key`](/api-reference/idempotency) you used the first time. That way a retry after a timeout — where the write may well have succeeded before the connection dropped — replays the original response instead of creating a duplicate.
