@@ -1,0 +1,58 @@
+---
+title: API Introduction
+description: Manage events, shifts, and signups programmatically — from your own scripts, an automation platform, or an AI agent.
+---
+
+The SignUpBreeze API lets other software do what you would otherwise do by hand: create an event, add shifts, check what still needs volunteers, and read who signed up.
+
+```
+https://api.signupbreeze.com/v1
+```
+
+<Note>API access is available on the Pro plan. Create a token under **Settings > API** in your organization.</Note>
+
+## What you can do
+
+Events and shifts are read-write. You can create an event, add and resize its shifts, duplicate it for next month, publish it, and delete it.
+
+Signups are read-only. You can see who has registered for a shift, but you cannot add or cancel a registration through the API — volunteers sign up through the public event page, and that is deliberately the only way in.
+
+The endpoint you probably want first is **coverage**. It answers "what still needs people?" for an entire event in one call, so you don't have to list shifts and registrations and do the arithmetic yourself.
+
+## Before you start
+
+Four rules apply to every endpoint. Each has its own page:
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="key" href="/api-reference/authentication">
+    Every request carries a bearer token. Tokens belong to the organization and expire.
+  </Card>
+  <Card title="Scopes" icon="shield-check" href="/api-reference/scopes">
+    Each token grants a specific set of permissions, and no more.
+  </Card>
+  <Card title="Idempotency" icon="repeat" href="/api-reference/idempotency">
+    Send an `Idempotency-Key` on writes so a retry doesn't create a second event.
+  </Card>
+  <Card title="Pagination" icon="list" href="/api-reference/pagination">
+    Collections are cursor paginated. Follow `meta.next_cursor`.
+  </Card>
+</CardGroup>
+
+## Your first request
+
+```bash
+curl https://api.signupbreeze.com/v1/events \
+  --header "Authorization: Bearer YOUR_API_TOKEN" \
+  --header "Accept: application/json"
+```
+
+## The OpenAPI spec
+
+The reference pages here are generated from a machine-readable spec, published at the root of the API host:
+
+```
+https://api.signupbreeze.com/openapi.yaml
+https://api.signupbreeze.com/openapi.json
+```
+
+Point Postman, Insomnia, an SDK generator, or an AI agent at either URL. The spec is generated from the code that serves the API, so it describes what is actually deployed rather than what someone remembered to write down.

@@ -83,6 +83,23 @@
         ]
       },
       {
+        "group": "API Reference",
+        "icon": "code",
+        "pages": [
+          "api-reference/introduction",
+          "api-reference/authentication",
+          "api-reference/scopes",
+          "api-reference/idempotency",
+          "api-reference/pagination",
+          "api-reference/errors"
+        ]
+      },
+      {
+        "group": "Endpoints",
+        "icon": "terminal",
+        "openapi": "https://api.signupbreeze.com/openapi.yaml"
+      },
+      {
         "group": "Changelog",
         "icon": "scroll-text",
         "pages": [

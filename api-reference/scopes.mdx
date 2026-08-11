@@ -1,0 +1,41 @@
+---
+title: Scopes
+description: What each permission grants, and how to choose the smallest set an integration needs.
+---
+
+Every token carries a set of scopes. Each endpoint requires one, and a request whose token lacks it is refused with `403` — no matter who created the token or what plan the organization is on.
+
+## Available scopes
+
+| Scope | Grants |
+| --- | --- |
+| `team:read` | Read the organization name, slug, and settings. |
+| `events:read` | List events and read their details, including coverage. |
+| `events:write` | Create, update, duplicate, publish, and delete events. |
+| `slots:read` | List shifts and read their capacity. |
+| `slots:write` | Create, update, and delete shifts. |
+| `registrations:read` | See who has signed up, including their name and email. |
+
+Write scopes do not imply the matching read scope. An integration that creates an event and then reads it back needs both `events:write` and `events:read`.
+
+There is no `registrations:write`. Signups are created through the public event page, and the API deliberately offers no way around that.
+
+## Choosing scopes
+
+Grant the least that works. Two cases cover most integrations:
+
+**A dashboard or a reporting script** needs `events:read`, `slots:read`, and `registrations:read`. It can see everything and change nothing, so a leaked token is an information problem rather than a destructive one.
+
+**An agent that manages events for you** needs the write scopes as well. Be deliberate here: `events:write` includes deleting an event, and deleting an event removes its shifts and signups with it.
+
+<Warning>`registrations:read` exposes volunteer names and email addresses. Grant it only to integrations that genuinely need to contact or count people, and treat the token as carrying personal data.</Warning>
+
+## Scopes are a stable contract
+
+These exact strings are what your token carries and what your code checks. They will not be renamed or repurposed — a scope that changed meaning would silently change what an already-issued token is allowed to do. New scopes may be added as the API grows.
+
+## When a request is refused
+
+A `403` means the token is valid but lacks the scope the endpoint requires. Check which scopes the token was granted in **Settings > API**; you cannot add a scope to an existing token, so create a replacement with the right set.
+
+A `404` on a record that you know exists means something different — see [errors](/api-reference/errors).

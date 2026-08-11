@@ -1,0 +1,58 @@
+---
+title: Authentication
+description: How API tokens work, who they belong to, and when they expire.
+---
+
+Every request needs a bearer token:
+
+```bash
+curl https://api.signupbreeze.com/v1/team \
+  --header "Authorization: Bearer YOUR_API_TOKEN"
+```
+
+There is no other way in. A browser session on signupbreeze.com does not authenticate an API request, even in the same browser.
+
+## Creating a token
+
+<Steps>
+  <Step title="Open your organization settings">
+    Go to **Settings > API**. You need to be an owner or an admin.
+  </Step>
+  <Step title="Choose what the token may do">
+    Grant only the [scopes](/api-reference/scopes) the integration needs. A token that only reads events cannot delete one.
+  </Step>
+  <Step title="Choose how long it lasts">
+    Pick 30, 90, 180, or 365 days. The default is 365.
+  </Step>
+  <Step title="Copy the token">
+    It is shown once, at creation, and never again. Store it somewhere your integration can read it and you cannot lose it.
+  </Step>
+</Steps>
+
+## Tokens belong to the organization
+
+A token is not tied to the person who created it. If that admin leaves and their account is removed, the token keeps working and the integration keeps running.
+
+The practical consequence: anyone with admin access to the organization can see that a token exists and revoke it. Name your tokens after the integration that uses them, not after yourself.
+
+## Every token expires
+
+There is no permanent token. The longest life you can choose is a year, and that is also the default.
+
+Plan for the renewal rather than discovering it. Create the replacement token, deploy it, then revoke the old one — nothing that uses the old token keeps working past its expiry date, which is shown in **Settings > API**.
+
+An expired token is refused with `401`, exactly like a revoked one. Your integration cannot tell the difference, and does not need to: both mean "get a new token".
+
+Expired tokens stay visible in settings for 90 days after they lapse, so there is a record to look at when someone asks why an integration stopped.
+
+## Revoking a token
+
+Revoke it in **Settings > API**. It stops working immediately.
+
+Revoke a token the moment you suspect it has leaked — into a git history, a CI log, a screenshot, a pasted snippet. Creating a replacement takes a few seconds.
+
+## Rate limits
+
+Requests are limited to 120 per minute per token. Over that, the API answers `429` with a `Retry-After` header telling you how many seconds to wait.
+
+Give each integration its own token. Sharing one token across several tools means they share a rate limit, and a busy one can starve the others.
