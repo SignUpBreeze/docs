@@ -95,7 +95,7 @@
         ]
       },
       {
-        "group": "Endpoints",
+        "group": "API Endpoints",
         "icon": "terminal",
         "openapi": "https://api.signupbreeze.com/openapi.yaml"
       },
