@@ -53,6 +53,14 @@ Revoke a token the moment you suspect it has leaked — into a git history, a CI
 
 ## Rate limits
 
-Requests are limited to 120 per minute per token. Over that, the API answers `429` with a `Retry-After` header telling you how many seconds to wait.
+Your limit depends on your plan, and applies per token:
+
+| Plan | Rate limit |
+| --- | --- |
+| Free | 30 requests/min |
+| Starter | 120 requests/min |
+| Pro | 300 requests/min |
+
+Over that, the API answers `429` with a `Retry-After` header telling you how many seconds to wait.
 
 Give each integration its own token. Sharing one token across several tools means they share a rate limit, and a busy one can starve the others.

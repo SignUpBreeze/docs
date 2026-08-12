@@ -16,10 +16,10 @@ Errors are JSON, and always carry a `message`:
 | Code | Meaning | What to do |
 | --- | --- | --- |
 | `401` | The token is missing, revoked, or expired. | Get a new token. Retrying will not help. |
-| `403` | The token is valid but lacks the required scope, or the organization's plan does not include API access. | Create a token with the right [scopes](/api-reference/scopes), or upgrade the plan. |
+| `403` | The token is valid but lacks the required scope. | Create a token with the right [scopes](/api-reference/scopes). |
 | `404` | No such record — or it belongs to another organization. | See below. |
 | `422` | The request was understood but rejected. | Read `errors` for the specific fields, and fix the request. |
-| `429` | You have exceeded 120 requests per minute. | Wait the number of seconds in `Retry-After`, then retry. |
+| `429` | You have exceeded your plan's [rate limit](/api-reference/authentication#rate-limits) for this token. | Wait the number of seconds in `Retry-After`, then retry. |
 
 ## A 404 may mean "not yours"
 

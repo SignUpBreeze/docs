@@ -4,7 +4,23 @@ description: New features, improvements, and milestones for SignUpBreeze.
 rss: true
 ---
 
-<Update label="August 2026" description="In-app support, and a support tier on every plan">
+<Update label="August 2026" description="A public API on every plan, in-app support, and a support tier on every plan">
+  ### An API for your organization
+  SignUpBreeze now has a public API, so other software can do what you would otherwise do by hand — create an event, add and resize its shifts, check what still needs volunteers, and read who signed up. Point your scripts, your automation platform, or an AI agent at it.
+
+  Create a token under **Settings > API**, granting only the scopes the integration needs, and start with the [API introduction](/api-reference/introduction).
+
+  ### The API is on every plan
+  Every plan can use the API, including Free. Plans differ by how fast you can call it, not by whether you can:
+
+  | Plan | Rate limit |
+  | --- | --- |
+  | Free | 30 requests/min |
+  | Starter | 120 requests/min |
+  | Pro | 300 requests/min |
+
+  The limit applies per token, so give each integration its own. See [rate limits](/api-reference/authentication#rate-limits).
+
   ### Get help without leaving the app
   There's a new **Support** page at [Settings > Support](/account/support). On paid plans you can open a request, describe what happened, and follow the whole conversation in one place. We reply by email, and every reply shows up in the thread too.
 
